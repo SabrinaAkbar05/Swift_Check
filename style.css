@@ -38,54 +38,58 @@ header {
   text-align: center;
 }
 
-/* Input Area - Stacked on mobile */
+/* --- Input Area Layout --- */
 .input-area {
   padding: 20px;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; /* Stacked by default for mobile */
   gap: 12px;
   background: #f8fafc;
 }
 
-/* ==================== FIX FOR iOS DATETIME-LOCAL ==================== */
+/* --- Input Fields Fixes --- */
 #task-input, #task-schedule {
   width: 100%;
   padding: 14px 16px;
   border: 2px solid #e2e8f0;
   border-radius: 10px;
-  font-size: 16px !important;        /* Critical: Prevents iOS zoom + grey box */
-  background-color: white !important;
+  font-size: 16px; /* Prevents iOS auto-zoom */
+  background-color: white;
   color: #1e293b;
   min-height: 52px;
   box-sizing: border-box;
 }
 
-#task-input {
-  -webkit-appearance: none;
-  appearance: none;
-}
-
-/* iOS Specific Fix for datetime-local */
+/* Specific Fix for Mobile Date/Time Appearance */
 #task-schedule {
-  -webkit-appearance: auto !important;
-  appearance: auto !important;
-  padding-right: 50px !important;
+  position: relative;
+  -webkit-appearance: none; /* Strips native iOS grey styling */
+  appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='%236366f1' stroke-width='2.5' viewBox='0 0 24 24'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cpath d='M16 2v4M8 2v4M3 10h18'/%3E%3C/svg%3E") !important;
   background-repeat: no-repeat !important;
   background-position: right 16px center !important;
   background-size: 20px !important;
 }
 
+/* Ensures the date text is visible and styled on all devices */
+#task-schedule::-webkit-datetime-edit {
+  display: flex;
+  color: #1e293b;
+}
+
+/* Makes the whole input box clickable for the calendar on mobile */
 #task-schedule::-webkit-calendar-picker-indicator {
-  opacity: 0;
   position: absolute;
+  top: 0;
+  left: 0;
   right: 0;
-  width: 50px;
+  bottom: 0;
+  width: 100%;
   height: 100%;
+  opacity: 0;
   cursor: pointer;
 }
 
-/* Focus state */
 #task-input:focus, #task-schedule:focus {
   border-color: var(--primary);
   outline: none;
@@ -102,8 +106,14 @@ header {
   cursor: pointer;
   font-size: 16px;
   min-height: 52px;
+  transition: opacity 0.2s;
 }
 
+#add-btn:active {
+  opacity: 0.8;
+}
+
+/* --- Controls & Filters --- */
 .controls {
   padding: 15px 20px;
   display: flex;
@@ -128,6 +138,7 @@ header {
   cursor: pointer;
   white-space: nowrap;
   font-size: 14px;
+  background: #f1f5f9;
 }
 
 .filter-btn.active {
@@ -135,6 +146,7 @@ header {
   color: white;
 }
 
+/* --- Task List Items --- */
 .task-list {
   max-height: 350px;
   overflow-y: auto;
@@ -194,6 +206,7 @@ header {
   padding: 15px 20px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   font-size: 13px;
   color: #64748b;
 }
@@ -205,22 +218,32 @@ header {
   cursor: pointer;
 }
 
-/* Responsive */
-@media (min-width: 480px) {
+/* --- Responsive Layout --- */
+@media (min-width: 500px) {
+  /* On larger screens (Laptop), layout items horizontally */
   .input-area {
-    flex-direction: row;
-    align-items: flex-start;
+    display: grid;
+    grid-template-areas: 
+      "input button"
+      "date button";
+    grid-template-columns: 1fr auto;
     gap: 10px;
   }
   
-  #add-btn {
-    margin-top: 0;
-    padding: 0 24px;
+  #task-input { grid-area: input; }
+  #task-schedule { grid-area: date; }
+  #add-btn { 
+    grid-area: button; 
+    height: 100%; /* Spans both rows like in your screenshot */
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 499px) {
   .container {
     border-radius: 16px;
+  }
+  /* On Mobile, keep them stacked but ensure they look clean */
+  #add-btn {
+    width: 100%;
   }
 }
