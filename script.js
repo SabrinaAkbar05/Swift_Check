@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
     let tasks = [];
     let currentFilter = 'all';
@@ -36,6 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
         saveTasks();
         taskInput.value = '';
         taskSchedule.value = '';
+        
+        // Reset type back to text to show placeholder again
+        taskSchedule.type = 'text'; 
+        
         renderTasks();
     }
 
@@ -82,7 +85,6 @@ document.addEventListener('DOMContentLoaded', () => {
         return tasks;
     }
 
-    // Event Listeners
     addBtn.onclick = addTask;
     taskInput.onkeypress = (e) => { if(e.key === 'Enter') addTask(); };
 
@@ -107,7 +109,5 @@ document.addEventListener('DOMContentLoaded', () => {
         renderTasks(filtered);
     };
 
-    // Initial Load
     loadTasks();
-    console.log("SwiftCheck Initialized Successfully!");
 });
