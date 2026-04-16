@@ -2,29 +2,27 @@
   --primary: #6366f1;
   --success: #22c55e;
   --danger: #ef4444;
-  --gray: #64748b;
-  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
+  --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; }
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
 body {
   font-family: 'Segoe UI', system-ui, sans-serif;
   background: var(--bg-gradient);
-  background-attachment: fixed;
   min-height: 100vh;
-  padding: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 15px;
 }
 
 .container {
   max-width: 600px;
   width: 100%;
-  background: rgba(255, 255, 255, 0.98);
+  background: white;
   border-radius: 20px;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.3);
   overflow: hidden;
 }
 
@@ -37,145 +35,69 @@ header {
 
 .input-area {
   padding: 20px;
-  background: #fff;
-  border-bottom: 1px solid #e2e8f0;
   display: flex;
   gap: 10px;
+  background: #f8fafc;
 }
 
-.input-group {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
+.input-group { flex: 1; display: flex; flex-direction: column; gap: 8px; }
 
+/* FIX FOR MOBILE GREY BAR */
 #task-input, #task-schedule {
   width: 100%;
   padding: 12px;
   border: 2px solid #e2e8f0;
   border-radius: 10px;
-  outline: none;
-  font-size: 16px; /* Prevents iOS zoom-in */
+  font-size: 16px; /* Prevents iOS auto-zoom on focus */
+  background-color: white !important;
+  color: #1e293b;
+  min-height: 45px;
+  -webkit-appearance: none; /* Modern look */
+}
+
+#task-schedule {
+  -webkit-appearance: listbox; /* Forces date icon on iOS */
 }
 
 #add-btn {
-  padding: 0 15px;
   background: var(--primary);
   color: white;
   border: none;
   border-radius: 12px;
-  font-weight: 600;
+  padding: 0 15px;
+  font-weight: bold;
   cursor: pointer;
 }
 
-.controls {
-  padding: 15px 20px;
-  background: #f8fafc;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+.controls { padding: 15px 20px; display: flex; gap: 8px; border-bottom: 1px solid #eee; overflow-x: auto; }
 
-.filter-group {
-  display: flex;
-  gap: 5px;
-}
+#search-input { flex: 1; padding: 10px; border: 1px solid #ddd; border-radius: 8px; min-width: 120px; }
 
-.filter-btn {
-  flex: 1;
-  padding: 8px;
-  border: none;
-  background: #fff;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 13px;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
-}
+.filter-btn { padding: 8px 12px; border: none; border-radius: 8px; cursor: pointer; white-space: nowrap; }
 
-.filter-btn.active {
-  background: var(--primary);
-  color: white;
-}
+.filter-btn.active { background: var(--primary); color: white; }
 
-.task-list {
-  max-height: 400px;
-  overflow-y: auto;
-}
+.task-list { max-height: 350px; overflow-y: auto; }
 
-.task-item {
-  display: flex;
-  align-items: center;
-  padding: 15px 20px;
-  border-bottom: 1px solid #f1f5f9;
-}
+.task-item { display: flex; align-items: center; padding: 15px 20px; border-bottom: 1px solid #f1f5f9; }
 
-.checkbox {
-  width: 22px;
-  height: 22px;
-  border: 2px solid #cbd5e1;
-  border-radius: 6px;
-  margin-right: 15px;
-  cursor: pointer;
-}
+.checkbox { width: 22px; height: 22px; border: 2px solid #cbd5e1; border-radius: 50%; margin-right: 15px; cursor: pointer; flex-shrink: 0; }
 
-.task-item.completed .checkbox {
-  background: var(--success);
-  border-color: var(--success);
-}
+.task-item.completed .checkbox { background: var(--success); border-color: var(--success); }
 
 .task-text { flex: 1; }
 
-.task-item.completed .task-text {
-  text-decoration: line-through;
-  color: var(--gray);
-}
+.task-item.completed .task-text { text-decoration: line-through; color: #94a3b8; }
 
-.task-time-tag {
-  font-size: 11px;
-  color: var(--primary);
-  background: #eef2ff;
-  padding: 2px 6px;
-  border-radius: 4px;
-  margin-top: 4px;
-  display: inline-block;
-}
+.task-time-tag { font-size: 11px; color: var(--primary); background: #eef2ff; padding: 2px 6px; border-radius: 4px; margin-top: 4px; display: inline-block; }
 
-.delete-btn {
-  background: none;
-  border: none;
-  color: var(--danger);
-  font-size: 20px;
-  cursor: pointer;
-}
+.delete-btn { color: var(--danger); background: none; border: none; font-size: 20px; cursor: pointer; padding: 5px; }
 
-.footer {
-  padding: 15px 20px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 13px;
-  color: var(--gray);
-}
+.footer { padding: 15px 20px; display: flex; justify-content: space-between; font-size: 13px; color: #64748b; }
 
 #clear-completed { border: none; background: none; color: var(--danger); cursor: pointer; }
 
-/* MOBILE OPTIMIZATIONS */
 @media (max-width: 480px) {
-  .input-area {
-    flex-direction: column;
-  }
-  
-  #add-btn {
-    padding: 15px;
-  }
-
-  .container {
-    border-radius: 15px;
-  }
-  
-  /* Ensure date picker is always visible and clickable */
-  #task-schedule {
-    display: block !important;
-    min-height: 45px;
-  }
+  .input-area { flex-direction: column; }
+  #add-btn { padding: 12px; }
 }
