@@ -38,6 +38,7 @@ header {
   text-align: center;
 }
 
+/* Input Area - Stacked on mobile */
 .input-area {
   padding: 20px;
   display: flex;
@@ -46,16 +47,16 @@ header {
   background: #f8fafc;
 }
 
-/* Improved Input Styles - Fixes grey box on iOS */
+/* ==================== FIX FOR iOS DATETIME-LOCAL ==================== */
 #task-input, #task-schedule {
   width: 100%;
-  padding: 12px 16px;
+  padding: 14px 16px;
   border: 2px solid #e2e8f0;
   border-radius: 10px;
-  font-size: 16px;           /* Prevents iOS auto-zoom */
+  font-size: 16px !important;        /* Critical: Prevents iOS zoom + grey box */
   background-color: white !important;
   color: #1e293b;
-  min-height: 48px;
+  min-height: 52px;
   box-sizing: border-box;
 }
 
@@ -64,20 +65,31 @@ header {
   appearance: none;
 }
 
-/* Special styling for datetime-local to show properly on iOS */
+/* iOS Specific Fix for datetime-local */
 #task-schedule {
-  -webkit-appearance: auto;
-  appearance: auto;
-  padding-right: 45px;       /* Space for calendar icon */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='18' fill='none' stroke='%236366f1' stroke-width='2.5' viewBox='0 0 24 24'%3E%3Cpath d='M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 14px center;
-  background-size: 18px;
+  -webkit-appearance: auto !important;
+  appearance: auto !important;
+  padding-right: 50px !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='%236366f1' stroke-width='2.5' viewBox='0 0 24 24'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cpath d='M16 2v4M8 2v4M3 10h18'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 16px center !important;
+  background-size: 20px !important;
 }
 
-#task-schedule:focus {
+#task-schedule::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  width: 50px;
+  height: 100%;
+  cursor: pointer;
+}
+
+/* Focus state */
+#task-input:focus, #task-schedule:focus {
   border-color: var(--primary);
   outline: none;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
 #add-btn {
@@ -85,11 +97,11 @@ header {
   color: white;
   border: none;
   border-radius: 12px;
-  padding: 12px 20px;
+  padding: 14px 20px;
   font-weight: bold;
   cursor: pointer;
   font-size: 16px;
-  min-height: 48px;
+  min-height: 52px;
 }
 
 .controls {
@@ -102,18 +114,20 @@ header {
 
 #search-input {
   flex: 1;
-  padding: 10px;
+  padding: 10px 12px;
   border: 1px solid #ddd;
   border-radius: 8px;
   min-width: 120px;
+  font-size: 16px;
 }
 
 .filter-btn {
-  padding: 8px 12px;
+  padding: 8px 16px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   white-space: nowrap;
+  font-size: 14px;
 }
 
 .filter-btn.active {
@@ -171,7 +185,7 @@ header {
   color: var(--danger);
   background: none;
   border: none;
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
   padding: 5px;
 }
@@ -191,16 +205,17 @@ header {
   cursor: pointer;
 }
 
-/* Responsive adjustments */
+/* Responsive */
 @media (min-width: 480px) {
   .input-area {
     flex-direction: row;
     align-items: flex-start;
+    gap: 10px;
   }
   
   #add-btn {
     margin-top: 0;
-    padding: 0 20px;
+    padding: 0 24px;
   }
 }
 
