@@ -40,7 +40,7 @@ header {
   text-align: center;
 }
 
-/* --- Input Area with Grid --- */
+/* --- Input Area Layout --- */
 .input-area {
   padding: 20px;
   background: #f8fafc;
@@ -49,42 +49,45 @@ header {
   gap: 12px;
 }
 
+/* --- Shared Input Styling --- */
 #task-input, #task-schedule {
   width: 100%;
   padding: 14px 16px;
   border: 2px solid #e2e8f0;
   border-radius: 10px;
-  font-size: 16px; /* Prevents iOS zoom */
+  font-size: 16px;
+  font-family: inherit;
   color: var(--text-main);
   background-color: white;
   min-height: 52px;
-}
-
-/* --- The Mobile Placeholder Fix --- */
-#task-schedule {
-  position: relative;
+  outline: none;
+  transition: all 0.2s ease;
   -webkit-appearance: none;
   appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='%236366f1' stroke-width='2.5' viewBox='0 0 24 24'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cpath d='M16 2v4M8 2v4M3 10h18'/%3E%3C/svg%3E") !important;
-  background-repeat: no-repeat !important;
-  background-position: right 16px center !important;
-  background-size: 20px !important;
 }
 
-/* Fake placeholder text for mobile */
-#task-schedule::before {
-  content: "mm/dd/yyyy --:-- --";
-  position: absolute;
-  color: var(--text-muted);
-  pointer-events: none;
+#task-input:focus, #task-schedule:focus {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
 }
 
-/* Hide fake placeholder when value is picked or focused */
-#task-schedule:focus::before,
-#task-schedule:valid::before {
-  display: none;
+/* --- Date Input Customization --- */
+#task-schedule {
+  position: relative;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' fill='none' stroke='%236366f1' stroke-width='2.5' viewBox='0 0 24 24'%3E%3Crect x='3' y='4' width='18' height='18' rx='2'/%3E%3Cpath d='M16 2v4M8 2v4M3 10h18'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  background-size: 20px;
+  text-align: left;
 }
 
+/* Ensures date text looks consistent on Mobile Safari */
+#task-schedule::-webkit-datetime-edit {
+  display: flex;
+  padding: 0;
+}
+
+/* Makes the whole box clickable for the picker */
 #task-schedule::-webkit-calendar-picker-indicator {
   position: absolute;
   top: 0; left: 0; right: 0; bottom: 0;
@@ -93,6 +96,7 @@ header {
   cursor: pointer;
 }
 
+/* --- Buttons & Controls --- */
 #add-btn {
   background: var(--primary);
   color: white;
@@ -102,9 +106,13 @@ header {
   font-weight: bold;
   font-size: 16px;
   cursor: pointer;
+  transition: background 0.2s;
 }
 
-/* --- Controls & Search --- */
+#add-btn:active {
+  transform: scale(0.98);
+}
+
 .controls {
   padding: 15px 20px;
   display: flex;
@@ -121,10 +129,7 @@ header {
   font-size: 15px;
 }
 
-.filter-group {
-  display: flex;
-  gap: 5px;
-}
+.filter-group { display: flex; gap: 5px; }
 
 .filter-btn {
   padding: 8px 12px;
@@ -133,6 +138,7 @@ header {
   cursor: pointer;
   font-size: 14px;
   background: #f1f5f9;
+  transition: all 0.2s;
 }
 
 .filter-btn.active {
@@ -140,7 +146,7 @@ header {
   color: white;
 }
 
-/* --- List Styling --- */
+/* --- List & Items --- */
 .task-list {
   max-height: 350px;
   overflow-y: auto;
@@ -159,6 +165,7 @@ header {
   border-radius: 50%;
   margin-right: 15px;
   flex-shrink: 0;
+  cursor: pointer;
 }
 
 .task-item.completed .checkbox {
@@ -166,17 +173,28 @@ header {
   border-color: var(--success);
 }
 
-.task-text { flex: 1; }
+.task-text { flex: 1; min-width: 0; }
 
 .task-item.completed .task-text {
   text-decoration: line-through;
   color: var(--text-muted);
 }
 
+.task-time-tag {
+  font-size: 11px;
+  color: var(--primary);
+  background: #eef2ff;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 4px;
+  display: inline-block;
+}
+
 .delete-btn {
   color: var(--danger);
   background: none; border: none;
-  font-size: 20px; cursor: pointer;
+  font-size: 24px; cursor: pointer;
+  padding-left: 10px;
 }
 
 .footer {
@@ -185,6 +203,7 @@ header {
   justify-content: space-between;
   font-size: 13px;
   color: #64748b;
+  align-items: center;
 }
 
 #clear-completed {
@@ -192,15 +211,16 @@ header {
   color: var(--danger); cursor: pointer;
 }
 
-/* --- DESKTOP LAYOUT (LAPTOP) --- */
+/* --- RESPONSIVE DESKTOP LAYOUT --- */
 @media (min-width: 500px) {
   .input-area {
     display: grid;
     grid-template-areas: 
       "text btn"
       "date btn";
-    grid-template-columns: 1fr 120px;
+    grid-template-columns: 1fr 130px;
     grid-template-rows: 1fr 1fr;
+    gap: 10px;
   }
   
   #task-input { grid-area: text; }
