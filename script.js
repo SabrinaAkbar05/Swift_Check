@@ -1,4 +1,4 @@
-// Wrap everything to ensure DOM is ready
+
 document.addEventListener('DOMContentLoaded', () => {
     let tasks = [];
     let currentFilter = 'all';
