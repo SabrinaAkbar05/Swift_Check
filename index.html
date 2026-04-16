@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TaskFlow - To-Do App</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>SwiftCheck</h1>
+      <p class="subtitle">Stay organized • Get things done</p>
+    </header>
+
+    <div class="input-area">
+      <div class="input-group">
+        <input type="text" id="task-input" placeholder="What needs to be done?" autocomplete="off">
+        <input type="datetime-local" id="task-schedule">
+      </div>
+      <button id="add-btn">Add Task</button>
+    </div>
+
+    <div class="controls">
+      <input type="text" id="search-input" placeholder="Search tasks...">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="active">Active</button>
+      <button class="filter-btn" data-filter="completed">Completed</button>
+    </div>
+
+    <div class="task-list" id="task-list"></div>
+
+    <div class="footer">
+      <span id="task-count">0 active tasks</span>
+      <button id="clear-completed">Clear Completed</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
