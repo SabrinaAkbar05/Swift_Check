@@ -1,10 +1,8 @@
 :root {
   --primary: #6366f1;
-  --primary-dark: #4f46e5;
   --success: #22c55e;
   --danger: #ef4444;
   --gray: #64748b;
-  /* New Gradient Colors */
   --bg-gradient: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #312e81 100%);
 }
 
@@ -15,140 +13,84 @@ body {
   background: var(--bg-gradient);
   background-attachment: fixed;
   min-height: 100vh;
-  padding: 20px;
+  padding: 15px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* Subtle animated background shapes */
-body::before {
-  content: "";
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  background: rgba(99, 102, 241, 0.15);
-  filter: blur(80px);
-  border-radius: 50%;
-  top: 10%;
-  left: 10%;
-  z-index: -1;
-}
-
 .container {
-  max-width: 650px;
+  max-width: 600px;
   width: 100%;
-  /* Glassmorphism Effect */
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 20px;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
   overflow: hidden;
-  position: relative;
 }
 
 header {
   background: var(--primary);
-  background: linear-gradient(to right, #6366f1, #818cf8);
   color: white;
-  padding: 40px 25px;
+  padding: 30px 20px;
   text-align: center;
 }
 
-h1 { 
-  font-size: 32px; 
-  font-weight: 800; 
-  letter-spacing: -0.5px;
-  text-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.subtitle { 
-  opacity: 0.85; 
-  font-size: 14px; 
-  margin-top: 6px;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-}
-
 .input-area {
-  padding: 30px;
-  background: #ffffff;
-  border-bottom: 1px solid #f1f5f9;
+  padding: 20px;
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
   display: flex;
-  gap: 15px;
+  gap: 10px;
 }
 
 .input-group {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
 }
 
 #task-input, #task-schedule {
   width: 100%;
-  padding: 14px;
+  padding: 12px;
   border: 2px solid #e2e8f0;
-  border-radius: 12px;
+  border-radius: 10px;
   outline: none;
-  font-family: inherit;
-  transition: all 0.2s ease;
-}
-
-#task-input:focus, #task-schedule:focus {
-  border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+  font-size: 16px; /* Prevents iOS zoom-in */
 }
 
 #add-btn {
-  padding: 0 25px;
+  padding: 0 15px;
   background: var(--primary);
   color: white;
   border: none;
-  border-radius: 14px;
-  font-weight: 700;
+  border-radius: 12px;
+  font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s, background 0.2s;
-}
-
-#add-btn:hover {
-  background: var(--primary-dark);
-  transform: translateY(-2px);
-}
-
-#add-btn:active {
-  transform: translateY(0);
 }
 
 .controls {
-  padding: 20px 30px;
+  padding: 15px 20px;
+  background: #f8fafc;
   display: flex;
-  gap: 12px;
-  background: #fff;
-  border-bottom: 1px solid #f1f5f9;
-  align-items: center;
+  flex-direction: column;
+  gap: 10px;
 }
 
-#search-input {
-  flex: 1;
-  padding: 10px 16px;
-  border: 2px solid #f1f5f9;
-  background: #f8fafc;
-  border-radius: 10px;
-  outline: none;
+.filter-group {
+  display: flex;
+  gap: 5px;
 }
 
 .filter-btn {
-  padding: 8px 16px;
+  flex: 1;
+  padding: 8px;
   border: none;
-  background: #f1f5f9;
-  color: var(--gray);
-  border-radius: 10px;
+  background: #fff;
+  border-radius: 8px;
   cursor: pointer;
   font-size: 13px;
-  font-weight: 600;
-  transition: all 0.2s;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
 }
 
 .filter-btn.active {
@@ -157,36 +99,24 @@ h1 {
 }
 
 .task-list {
-  min-height: 150px;
   max-height: 400px;
   overflow-y: auto;
-  background: white;
 }
 
 .task-item {
   display: flex;
   align-items: center;
-  padding: 18px 30px;
-  border-bottom: 1px solid #f8fafc;
-  transition: background 0.2s;
-}
-
-.task-item:hover {
-  background: #fcfdfe;
+  padding: 15px 20px;
+  border-bottom: 1px solid #f1f5f9;
 }
 
 .checkbox {
-  width: 24px;
-  height: 24px;
+  width: 22px;
+  height: 22px;
   border: 2px solid #cbd5e1;
-  border-radius: 8px; /* Slightly squared for a modern look */
-  margin-right: 18px;
+  border-radius: 6px;
+  margin-right: 15px;
   cursor: pointer;
-  transition: all 0.2s;
-}
-
-.task-item.completed {
-  background: #fbfcfd;
 }
 
 .task-item.completed .checkbox {
@@ -194,66 +124,58 @@ h1 {
   border-color: var(--success);
 }
 
-.task-text {
-  flex: 1;
-  font-size: 16px;
-  color: #1e293b;
-  font-weight: 500;
+.task-text { flex: 1; }
+
+.task-item.completed .task-text {
+  text-decoration: line-through;
+  color: var(--gray);
 }
 
 .task-time-tag {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--primary);
   background: #eef2ff;
-  padding: 4px 10px;
-  border-radius: 6px;
-  margin-top: 6px;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-top: 4px;
+  display: inline-block;
 }
 
 .delete-btn {
-  opacity: 0;
-  background: #fee2e2;
+  background: none;
   border: none;
   color: var(--danger);
-  font-size: 18px;
-  width: 32px;
-  height: 32px;
-  border-radius: 8px;
+  font-size: 20px;
   cursor: pointer;
-  transition: all 0.2s;
-}
-
-.task-item:hover .delete-btn {
-  opacity: 1;
 }
 
 .footer {
-  padding: 20px 30px;
+  padding: 15px 20px;
   display: flex;
   justify-content: space-between;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 13px;
   color: var(--gray);
-  background: white;
 }
 
-#clear-completed {
-  border: none;
-  background: none;
-  color: var(--danger);
-  cursor: pointer;
-  font-weight: 700;
-}
+#clear-completed { border: none; background: none; color: var(--danger); cursor: pointer; }
 
-#clear-completed:hover {
-  text-decoration: underline;
-}
+/* MOBILE OPTIMIZATIONS */
+@media (max-width: 480px) {
+  .input-area {
+    flex-direction: column;
+  }
+  
+  #add-btn {
+    padding: 15px;
+  }
 
-.empty-state {
-  text-align: center;
-  padding: 60px;
-  color: #94a3b8;
+  .container {
+    border-radius: 15px;
+  }
+  
+  /* Ensure date picker is always visible and clickable */
+  #task-schedule {
+    display: block !important;
+    min-height: 45px;
+  }
 }
