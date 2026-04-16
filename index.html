@@ -16,7 +16,9 @@
     <div class="input-area">
       <input type="text" id="task-input" placeholder="What needs to be done?" autocomplete="off">
       
-      <input type="datetime-local" id="task-schedule" required>
+      <input type="text" id="task-schedule" placeholder="Set date and time" 
+             onfocus="(this.type='datetime-local')" 
+             onblur="if(!this.value)this.type='text'">
       
       <button id="add-btn">Add Task</button>
     </div>
